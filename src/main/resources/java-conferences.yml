@@ -1,0 +1,14 @@
+en:
+  faker:
+    java-conferences:
+      names:
+        - "Devoxx UK"
+        - "DevNexus"
+        - "Devoxx Belgium"
+        - "JavaZone"
+        - "Jfall"
+        - "Jfokus"
+        - "JavaLand"
+        - "JNation"
+        - "JPrime"
+        - "JCON"
