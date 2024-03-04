@@ -32,7 +32,8 @@ import java.util.Locale;
 public class JavaConferences extends AbstractProvider<BaseProviders> {
     protected JavaConferences(BaseProviders faker) {
         super(faker);
-        faker.addPath(Locale.ENGLISH, Paths.get("src/main/resources/java-conferences.yml"));
+        faker.addPath(Locale.ENGLISH, Paths.get(
+                getClass().getClassLoader().getResource("java-conferences.yml").getPath()));
     }
 
     public String name() {
