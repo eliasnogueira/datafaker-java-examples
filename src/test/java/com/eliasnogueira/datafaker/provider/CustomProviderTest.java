@@ -40,8 +40,12 @@ class CustomProviderTest {
     @DisplayName("Should generate a Java event")
     void generateJavaEvent() {
         var javaEvent = myCustomFaker.javaConferences().name();
+        var country = myCustomFaker.country().name();
+
         LOGGER.info(javaEvent);
+        LOGGER.info(country);
 
         assertThat(javaEvent).isNotEmpty();
+        assertThat(country).isNotEmpty();
     }
 }
