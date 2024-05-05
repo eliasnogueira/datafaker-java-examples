@@ -29,11 +29,14 @@ import net.datafaker.providers.base.BaseProviders;
 import java.nio.file.Paths;
 import java.util.Locale;
 
+import static java.util.Objects.requireNonNull;
+
 public class JavaConferences extends AbstractProvider<BaseProviders> {
+
     protected JavaConferences(BaseProviders faker) {
         super(faker);
         faker.addPath(Locale.ENGLISH, Paths.get(
-                getClass().getClassLoader().getResource("java-conferences.yml").getPath()));
+                requireNonNull(getClass().getClassLoader().getResource("java-conferences.yml")).getPath()));
     }
 
     public String name() {
