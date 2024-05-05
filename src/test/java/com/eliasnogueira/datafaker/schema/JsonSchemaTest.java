@@ -24,43 +24,32 @@
 package com.eliasnogueira.datafaker.schema;
 
 import net.datafaker.Faker;
-import net.datafaker.transformations.Field;
 import net.datafaker.transformations.JsonTransformer;
 import net.datafaker.transformations.Schema;
-import net.datafaker.transformations.XmlTransformer;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
 
-import static net.datafaker.transformations.Field.compositeField;
 import static net.datafaker.transformations.Field.field;
-import static net.datafaker.transformations.JsonTransformer.JsonTransformerBuilder.FormattedAs;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-class JsonAndXmlSchemaTest {
+class JsonSchemaTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(JsonAndXmlSchemaTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(JsonSchemaTest.class);
     private final Faker faker = new Faker();
 
     @Test
     void generateJsonOutput() {
-        JsonTransformer<Object> jsonTransformer = JsonTransformer.builder().formattedAs(FormattedAs.JSON_ARRAY).build();
-        String jsonOutput = jsonTransformer.generate(retrieveCompositeSchema2(), 2);
+        JsonTransformer<Object> jsonTransformer = JsonTransformer.builder().build();
+        String jsonOutput = jsonTransformer.generate(retrieveCompositeSchema(), 2);
 
         LOGGER.info(jsonOutput);
         assertThatCode(() -> new JSONArray(jsonOutput)).doesNotThrowAnyException();
     }
 
-    @Test
-    void generateXmlOutput() {
-        XmlTransformer<Object> xmlTransformer = new XmlTransformer.XmlTransformerBuilder<>().pretty(true).build();
-        CharSequence xmlOutput = xmlTransformer.generate(retrieveCompositeSchema(), 2);
-
-        LOGGER.info(xmlOutput);
-    }
-
-    private Schema<Object, ?> retrieveCompositeSchema2() {
+    private Schema<Object, ?> retrieveCompositeSchema() {
         return Schema.of(
                 field("name", () -> faker.name().nameWithMiddle()),
                 field("street", () -> faker.address().streetAddress()),
@@ -68,16 +57,5 @@ class JsonAndXmlSchemaTest {
                 field("postcode", () -> faker.address().postcode()),
                 field("city", () -> faker.address().cityName())
         );
-    }
-
-    private Schema<Object, ?> retrieveCompositeSchema() {
-        return Schema.of(
-                field("name", () -> faker.name().nameWithMiddle()),
-                compositeField("address", new Field[]{
-                        field("street", () -> faker.address().streetAddress()),
-                        field("secondaryAddress", () -> faker.address().secondaryAddress()),
-                        field("postcode", () -> faker.address().postcode()),
-                        field("city", () -> faker.address().cityName())
-                }));
     }
 }
