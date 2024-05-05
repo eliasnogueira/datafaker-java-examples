@@ -9,19 +9,20 @@
     <version>1.0.0</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
 
-        <junit.version>5.10.2</junit.version>
-        <datafaker.version>2.1.0</datafaker.version>
+        <junit.version>5.11.0-M1</junit.version>
+        <datafaker.version>2.2.2</datafaker.version>
         <assertj.version>3.25.3</assertj.version>
-        <log4j.version>2.23.0</log4j.version>
-        <slf4j.version>2.0.12</slf4j.version>
+        <log4j.version>2.23.1</log4j.version>
+        <slf4j.version>2.0.13</slf4j.version>
         <json.version>20240205</json.version>
+        <maven-surefire-junit5-tree-reporter>1.2.1</maven-surefire-junit5-tree-reporter>
     </properties>
 
     <dependencies>
@@ -70,6 +71,21 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>me.fabriciorby</groupId>
+                        <artifactId>maven-surefire-junit5-tree-reporter</artifactId>
+                        <version>${maven-surefire-junit5-tree-reporter}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <reportFormat>plain</reportFormat>
+                    <consoleOutputReporter>
+                        <disable>true</disable>
+                    </consoleOutputReporter>
+                    <statelessTestsetInfoReporter
+                            implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter"/>
+                </configuration>
             </plugin>
 
             <plugin>
