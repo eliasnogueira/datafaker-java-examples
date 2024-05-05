@@ -37,7 +37,7 @@ import static net.datafaker.transformations.Field.field;
 
 class YamlSchemaTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(JsonAndXmlSchemaTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(YamlSchemaTest.class);
     private final Faker faker = new Faker();
 
     @Test

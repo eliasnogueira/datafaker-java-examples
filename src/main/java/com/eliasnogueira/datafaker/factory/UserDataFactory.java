@@ -23,9 +23,9 @@
  */
 package com.eliasnogueira.datafaker.factory;
 
-import net.datafaker.Faker;
 import com.eliasnogueira.datafaker.model.User;
 import com.eliasnogueira.datafaker.model.UserBuilder;
+import net.datafaker.Faker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
