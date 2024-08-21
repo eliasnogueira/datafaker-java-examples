@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 import static net.datafaker.transformations.Field.field;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CsvAndSqlSchemaTest {
+class CsvAndSqlSchemaTest extends SchemaBase {
 
     private static final Logger LOGGER = LogManager.getLogger(CsvAndSqlSchemaTest.class);
     private static final String COMMA = ",";
@@ -52,6 +52,8 @@ class CsvAndSqlSchemaTest {
         LOGGER.info(csvOutput);
 
         assertThat(csvOutput).contains(COMMA);
+
+        writeFile("auto-generated.csv", csvOutput);
     }
 
     @Test
@@ -60,13 +62,14 @@ class CsvAndSqlSchemaTest {
         SqlTransformer<String> sqlTransformer =
                 new SqlTransformer.SqlTransformerBuilder<String>()
                         .batch(5)
-                        .tableName("MY_TABLE")
+                        .tableName("USERS")
                         .dialect(SqlDialect.POSTGRES)
                         .build();
         String sqlOutput = sqlTransformer.generate(retrieveSchema(), 5);
         LOGGER.info(sqlOutput);
 
         assertThat(sqlOutput).contains("INSERT INTO", "VALUES");
+        writeFile("auto-generated.sql", sqlOutput);
     }
 
     private Schema<String, String> retrieveSchema() {
