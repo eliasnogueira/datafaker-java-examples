@@ -26,13 +26,16 @@ package com.eliasnogueira.datafaker.schema;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public abstract class SchemaBase {
 
     public void writeFile(String fileName, String content) {
-        String filePath = "src/test/resources/" + fileName;
+        String folder = "src/test/resources/";
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            Files.createDirectories(Paths.get(folder));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(folder + fileName));
             writer.write(content);
             writer.close();
         } catch (IOException e) {
