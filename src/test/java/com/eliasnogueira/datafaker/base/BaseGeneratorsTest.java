@@ -31,6 +31,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
+import java.util.Random;
 
 class BaseGeneratorsTest {
 
@@ -44,7 +45,7 @@ class BaseGeneratorsTest {
         String iban = faker.finance().iban("NL");
         String creditCardNumber = faker.business().creditCardNumber();
         String image = faker.internet().image();
-        String birthday = faker.date().birthday("yyyy/MM/dd");
+        String birthday = faker.timeAndDate().birthday("yyyy/MM/dd");
 
         Options opt = faker.options();
         Day day = opt.option(Day.class);
@@ -75,6 +76,18 @@ class BaseGeneratorsTest {
             softly.assertThat(nameInJapanese).isNotEmpty();
             softly.assertThat(day).isNotNull();
         });
+    }
+
+
+    @Test
+    public void predictableData() {
+        Faker fakerPredictable = new Faker(new Random(0));
+
+        String name = fakerPredictable.name().fullName();
+        String address = fakerPredictable.address().fullAddress();
+
+        LOGGER.info(name);
+        LOGGER.info(address);
     }
 
     public enum Day {
