@@ -6,7 +6,7 @@
 
     <groupId>com.eliasnogueira</groupId>
     <artifactId>datafaker-examples</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
@@ -18,15 +18,14 @@
 
         <junit.version>5.11.4</junit.version>
         <datafaker.version>2.4.2</datafaker.version>
-        <assertj.version>3.27.0</assertj.version>
+        <assertj.version>3.27.3</assertj.version>
         <log4j.version>2.23.1</log4j.version>
         <slf4j.version>2.0.13</slf4j.version>
-        <json.version>20240303</json.version>
+        <json.version>20250107</json.version>
         <maven-surefire-junit5-tree-reporter>1.4.0</maven-surefire-junit5-tree-reporter>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -84,7 +83,9 @@
                         <disable>true</disable>
                     </consoleOutputReporter>
                     <statelessTestsetInfoReporter
-                            implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter"/>
+                            implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
+                        <theme>ASCII</theme>
+                    </statelessTestsetInfoReporter>
                 </configuration>
             </plugin>
 
